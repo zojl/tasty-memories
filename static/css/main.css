@@ -1,0 +1,192 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.header {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #666666;
+}
+
+.container {
+    text-align: left;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.description {
+    margin-bottom: 20px;
+}
+
+.description p:first-child {
+    margin-top: 0;
+}
+
+.memory {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    transition: .5s, opacity .25s;
+}
+
+.memory>.arrow {
+    width: 0; 
+    height: 0;
+    box-sizing: border-box;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    cursor: pointer;
+}
+
+.memory>.arrow.previous {
+    border-right:10px solid #000; 
+}
+
+.memory>.arrow.next {
+    border-left:10px solid #000; 
+}
+
+.memory-content {
+    padding: 20px;
+    flex-grow: 1;
+    position: relative;
+}
+
+.memory-content > .text > p:first-child::before, .memory-content > .text > p:last-child::after {
+    display: inline-block;
+    font-size: 1.7em;
+    line-height: 1.2rem;
+    font-family: Georgia, serif;
+}
+
+.memory-content > .text > p:first-child::before {
+    content: "«";
+}
+
+.memory-content > .text > p:last-child::after {
+    content: "»";
+}
+
+.memory-content > .text {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.memory-content > .author {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.memory-content > .author > .userpic {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    border: none;
+    border-radius: 31px;
+}
+
+.memory-content > .author > a.username {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-weight: bold;
+    color: #000;
+    padding-left: 5px;
+}
+
+.services {
+    padding: 0;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.services > li.service {
+    margin: 5px;
+    padding: 10px;
+    list-style-type: none;
+    box-sizing: border-box;
+    background-color: #eee;
+    border-radius: 10px;
+}
+
+.service > .logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    float: left;
+    margin: 0 15px 5px 0;
+}
+
+.service > .name {
+    margin: 0;
+}
+
+.service > a.link {
+    display: inline-block;
+    text-decoration: none;
+    border: 1px solid #88f;
+    border-radius: .5rem;
+    color: #88f;
+    padding: 5px 10px;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #666666;
+}
+
+a.footerlink {
+    color: #666666;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    display: none;
+    text-align: left;
+    position: relative;
+}
+
+.popup .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.popup h3 {
+    margin-top: 0;
+}
+
+.popup-toggle {
+    cursor: pointer;
+    display: inline;
+    border-bottom: 2px dotted #8888ff;
+}

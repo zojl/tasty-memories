@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Воспоминания о Тейсти</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/main.js"></script> 
+    {{.AnalyticsTag}}
+</head>
+<body>
+    <h1 class="header">Тейсти навсегда в наших сердечках</h1>
+    <div class="container">
+        <div class="description description-top">
+            <p>
+                Тейсти, известный также как «Mmm... Tasty!», был домом для тысяч <span class="popup-toggle" data-popup="what-is-tlog">тлогов</span>.
+            </p>
+            <p>
+                Сайт закрылся много лет назад, оставив нас без любимого места, где можно было бы делиться мыслями. Многие даже не смогли получить архивы своих постов.
+            </p>
+            <p>
+                Мы приобрели этот домен, чтобы почтить память всех тлогов, что безвозвратно исчезли вместе с любимым сайтом. <span class="popup-toggle" data-popup="share-memory">Вы тоже можете поделиться своими воспоминаниями</span>.
+            </p>
+        </div>
+        <hr>
+        
+        <div class="memory" id="memory" data-user="{{.Memory.Username}}">
+            <div class="arrow previous"></div>
+            <div class="memory-content">
+                <div class="text">
+                    {{range .Memory.Content}}
+                        <p>{{ . }}</p>
+                    {{end}}
+                </div>
+                <div class="author">
+                    {{if .Memory.ImageSrc}}
+                        <img {{.Memory.ImageSrc}} alt="{{.Memory.Username}} userpic" class="userpic">
+                    {{else}}
+                        <img src="/static/img/empty.webp" alt="No userpic" class="userpic">
+                    {{end}}
+                    <a class="username" href="/~{{.Memory.Username}}">{{.Memory.Username}}</a>
+                </div>
+            </div>
+            <div class="arrow next"></div>
+        </div>
+        <hr>
+        
+        <h3>Что дальше?</h3>
+        <div class="description description-mid">
+            Со временем мы нашли себе новые пристанища. А некоторые даже разработали и запустили свои. <span class="popup-toggle" data-popup="your-service">Если у вас тоже есть такой — расскажите о нём.</span>
+        </div>
+        <hr>
+        
+        <ul class="services">
+            <li class="service">
+                <img class="logo" src="/static/services/mindwell.webp" alt="Mindwell logo"/>
+                <h4 class="name">Mindwell</h4>
+                <p class="text">Сервис, созданный бывшими пользователями Тейсти. Во многом повторяет его функционал. <span class="popup-toggle" data-popup="service-mindwell">Подробнее</span></p>
+                <a class="link" href="https://mindwell.win" target="_blank">Присоединиться</a>
+            </li>
+        </ul>
+    </div>
+    <div class="footer">
+        © 2024 — Мемориал Тейсти. Все тексты и изображения принадлежат их авторам.<br>
+        <a class="footerlink" href="https://github.com/zojl/tasty-memories">Исходный код проекта</a>
+    </div>
+    <div class="overlay" id="overlay">
+        <div class="popup" data-popup="what-is-tlog">
+            <span class="close">&times;</span>
+            <h3>Что такое тлог?</h3>
+            <p>Тлог — это как блог, только с возможностью выбирать формат записи. Подробнее можно прочитать <a href="https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%BC%D0%B1%D0%BB%D0%B5%D0%BB%D0%BE%D0%B3" target="_blank">в Википедии</a>.</p>
+        </div>
+        
+        <div class="popup" data-popup="share-memory">
+            <span class="close">&times;</span>
+            <h3>Поделитесь своими воспоминаниями о Тейсти</h3>
+            <p>Отправьте письмо на почту <a href="mailto:memories@taaasty.com">memories@taaasty.com</a></p>
+            <p>В письме кратко расскажите о своих воспоминаниях, мыслях, чувствах, эмоциях и теплых моментах, связанных с Тейсти. Обязательно укажите свой никнейм. Аватарка необязательна, но с ней будет чуть красивее, она будет обрезана до круга.</p>
+            <p>Данные будут размещены на неограниченный срок и доступны всему интернету, но их можно будет удалить или отредактировать, написав соответствующее письмо с того же почтового адреса. Мы не гарантируем, что данные будут размещены здесь и никогда не будут удалены, но постараемся.</p>
+        </div>
+
+        <div class="popup" data-popup="your-service">
+            <span class="close">&times;</span>
+            <h3>Поделитесь своим сервисом, сделанным на замену Тейсти</h3>
+            <p>Отправьте письмо с описанием на почту <a href="mailto:services@taaasty.com">services@taaasty.com</a></p>
+            <p>В письме расскажите о вашем сайте дважды: один раз коротко (8-12 слов) и один раз поподробнее. Приложите к письму логотип вашего сайта (учтите, он будет обрезан до круга).</p>
+            <p>Обязательно отправляйте письмо с почты, указанной в разделе контактов вашего сайта! Иначе мы не сможем подтвердить, что это именно ваш сайт!</p>
+            <p>Ещё одно важное ограничение: на сайте в публичном доступе администрацией должна декларироваться связь с Тейсти. Для ускорения процесса верификации в письме можно указать ссылку на такую страницу.</p>
+            <p>Данные будут размещены на неограниченный срок и доступны всему интернету, но их можно будет удалить или отредактировать, написав соответствующее письмо с того же почтового адреса. Если сайт перестанет работать или декларация связи с тейсти будет удалена, мы через какое-то время удалим блок с его описанием отсюда. Мы не гарантируем, что данные будут размещены здесь и никогда не будут удалены, но постараемся.</p>
+        </div>
+
+        <div class="popup" data-popup="service-mindwell">
+            <span class="close">&times;</span>
+            <h3>Mindwell</h3>
+            <p>Мне обещали прислать подробный текст позже, но пока этого не сделали.</p>
+        </div>
+    </div>
+</body>
+</html>
