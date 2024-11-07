@@ -131,7 +131,15 @@ body {
     margin: 0;
 }
 
-.service > a.link {
+.service > p.text:last-child {
+    margin-bottom: 0;
+}
+
+p.text.right {
+    text-align: right;
+}
+
+a.link-button {
     display: inline-block;
     text-decoration: none;
     border: 1px solid #88f;

@@ -14,7 +14,7 @@ import (
 )
 
 const (
-    templatePath = "./templates/index.html"
+    templateDir = "./templates/"
     memoriesDir  = "./memories"
 )
 
@@ -32,10 +32,12 @@ type Memory struct {
 type PageParams struct {
     AnalyticsTag template.HTML
     Memory *Memory
+    IsPersonal bool
 }
 
 func main() {
-    tmpl, err := template.ParseFiles(templatePath)
+    tmpl, err := template.ParseGlob(templateDir + "*.html")
+
     if err != nil {
         log.Fatalf("Error parsing template: %v", err)
     }
@@ -44,30 +46,37 @@ func main() {
         if strings.HasPrefix(r.URL.Path, "/static/") || strings.HasPrefix(r.URL.Path, "/memories/") {
             http.ServeFile(w, r, filepath.Join(".", r.URL.Path))
         } else {
-            var memory *Memory
-            if strings.HasPrefix(r.URL.Path, "/~") {
-                urlParts := strings.SplitN(r.URL.Path[2:], "/", 2)
-                if len(urlParts) > 1 {
-                    http.Redirect(w, r, "/~" + urlParts[0], http.StatusFound)
-                }
-                memory = loadMemory(urlParts[0])
+            params := PageParams {
+                AnalyticsTag: template.HTML(getEnv("ANALYTICS_TAG", "")),
+                Memory: nil,
+                IsPersonal: false,
             }
 
-            if memory == nil && r.URL.Path != "/" {
-                http.Redirect(w, r, "/", http.StatusFound)
+            if strings.HasPrefix(r.URL.Path, "/~") {
+                params.IsPersonal = true
+                urlParts := strings.SplitN(r.URL.Path[2:], "/", 2)
+/*                if len(urlParts) > 1 {
+**                    http.Redirect(w, r, "/~" + urlParts[0], http.StatusFound)
+**                }
+*/
+                params.Memory = loadMemory(urlParts[0])
+            }
+
+            if params.Memory == nil && r.URL.Path != "/" {
+                w.WriteHeader(http.StatusNotFound)
+                if err := tmpl.ExecuteTemplate(w, "404.html", params); err != nil {
+                    http.Error(w, "Error rendering template", http.StatusInternalServerError)
+                    log.Printf("Error executing template: %v", err)
+                }
+
                 return
             }
             
-            if memory == nil {
-                memory = loadRandomMemory()
-            }
-
-            params := PageParams {
-                AnalyticsTag: template.HTML(getEnv("ANALYTICS_TAG", "")),
-                Memory: memory,
+            if params.Memory == nil {
+                params.Memory = loadRandomMemory()
             }
             
-            if err := tmpl.Execute(w, params); err != nil {
+            if err := tmpl.ExecuteTemplate(w, "index.html", params); err != nil {
                 http.Error(w, "Error rendering template", http.StatusInternalServerError)
                 log.Printf("Error executing template: %v", err)
             }

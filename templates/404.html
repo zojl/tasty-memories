@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Воспоминания о Тейсти</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/main.js"></script> 
+    {{.AnalyticsTag}}
+</head>
+<body>
+    <h1 class="header">Тейсти навсегда в наших сердечках</h1>
+    <div class="container">
+        <h2>Ошибка 404</h2>
+        <h3>Воспоминание не найдено</h4>
+        <h4>Вернитесь <a href="/">на главную страницу</a>, чтобы узнать больше</h4>
+        <hr>
+        {{template "block_description.html"}}
+    </div>
+    <div class="footer">
+        © 2024 — Мемориал Тейсти. Все тексты и изображения принадлежат их авторам.<br>
+        <a class="footerlink" href="https://github.com/zojl/tasty-memories">Исходный код проекта</a>
+    </div>
+    <div class="overlay" id="overlay">
+        {{template "popup_tlog.html"}}
+
+        {{template "popup_memory.html"}}
+</body>
+</html>
