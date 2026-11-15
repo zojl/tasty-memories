@@ -1,11 +1,11 @@
-FROM golang:1.23-alpine AS build
+FROM golang:alpine AS build
 WORKDIR /app
 COPY go.mod ./
 RUN go mod download
 COPY . .
 RUN go build -o tasty
 
-FROM alpine:3.18
+FROM alpine:latest
 WORKDIR /app/
 COPY --from=build /app/memories ./memories/
 COPY --from=build /app/static ./static/
